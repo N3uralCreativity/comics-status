@@ -4,7 +4,12 @@
 // reader opens the GitHub link it builds.
 
 export const ISSUE_REPO = 'https://github.com/N3uralCreativity/comix-status';
-const STATE_TEXT = { up: 'working', challenge: 'working, may ask for a browser check', down: 'down', unknown: 'in an unknown state (the site turned the checker away)' };
+const STATE_TEXT = {
+  up: 'working',
+  challenge: 'working, may ask for a browser check',
+  down: 'down',
+  unknown: 'in an unknown state (the site turned the checker away)',
+};
 
 const fill = (text, vars) => text.replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? '');
 const norm = (s) => s.toLowerCase().replace(/[’']/g, "'");
@@ -17,13 +22,105 @@ export function when(iso) {
   return `${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())} ${p(d.getMonth() + 1)}/${p(d.getDate())}/${d.getFullYear()}`;
 }
 
-/** The site the text names: its name, id or domain. */
+const collapse = (s) => norm(s).replace(/[^a-z0-9]/g, '');
+/** Words that are part of many site names, or of how people talk about them: never a site on their own. */
+const COMMON = new Set(
+  'manga mangas manhwa manhua comic comics raw raws read reader reading chapter chapters download downloads site sites page pages web online free scan scans toon toons status working broken help please the and'.split(
+    ' ',
+  ),
+);
+/** Small words that never belong to a name: a run of words containing one is not read as a name. */
+const STOP = new Set('a an the my i is it in on of to for and or at this that what when why how me you can cannot not no do does'.split(' '));
+/** Typos allowed for a word of this length. Short words must be exact. */
+const slack = (len) => (len <= 4 ? 0 : len <= 7 ? 1 : len <= 11 ? 2 : 3);
+
+/** Edit distance with swapped neighbours counted as one edit ("mangahbu"), stopping once past `max`. */
+export function distance(a, b, max = Infinity) {
+  if (Math.abs(a.length - b.length) > max) return max + 1;
+  let prev2 = [];
+  let prev = Array.from({ length: b.length + 1 }, (_, j) => j);
+  for (let i = 1; i <= a.length; i++) {
+    const row = [i];
+    let best = i;
+    for (let j = 1; j <= b.length; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      let v = Math.min(prev[j] + 1, row[j - 1] + 1, prev[j - 1] + cost);
+      if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) v = Math.min(v, prev2[j - 2] + 1);
+      row.push(v);
+      best = Math.min(best, v);
+    }
+    if (best > max) return max + 1;
+    [prev2, prev] = [prev, row];
+  }
+  return prev[b.length];
+}
+
+/** How each site can be written: name, id, domain and the domain's first part, without spaces or dots. */
+const spellings = (site) => {
+  const host = new URL(site.home).hostname.replace(/^www\./, '');
+  return [...new Set([site.name, site.id, host, host.split('.')[0]].map(collapse))].filter((w) => w.length >= 3 && !COMMON.has(w));
+};
+
+/**
+ * The sites the text names, closest first, each with how far off it was (0 = spelled right).
+ * Reads single words and runs of two or three ("weeb central"), forgives a typo or two in long
+ * names, and accepts the start of a name ("rawdev"). Only the closest tier is returned, so
+ * "mangarawjp" is MangaRawJP and not also MangaRaw.
+ */
+export function findSites(text, sites) {
+  const words = (norm(text).match(/[a-z0-9][a-z0-9.-]*/g) ?? []).map((w) => w.replace(/[.-]+$/, ''));
+  const grams = new Set();
+  for (let i = 0; i < words.length; i++) {
+    for (let n = 1; n <= 3 && i + n <= words.length; n++) {
+      const run = words.slice(i, i + n);
+      if (!run.some((w) => STOP.has(w))) grams.add(collapse(run.join('')));
+    }
+  }
+  const scored = [];
+  for (const site of sites) {
+    let best = Infinity;
+    for (const name of spellings(site)) {
+      for (const g of grams) {
+        if (g === name) best = 0;
+        if (best === 0) break;
+        if (g.length < 4 || COMMON.has(g)) continue;
+        // The start of a name, at least half of it.
+        if (name.startsWith(g) && g.length * 2 >= name.length) best = Math.min(best, 1);
+        const max = slack(Math.max(g.length, name.length));
+        const off = max ? distance(g, name, max) : Infinity;
+        if (off <= max) best = Math.min(best, off);
+      }
+    }
+    if (best < Infinity) scored.push({ site, off: best });
+  }
+  const top = Math.min(...scored.map((x) => x.off));
+  return scored.filter((x) => x.off === top).sort((a, b) => a.site.name.localeCompare(b.site.name));
+}
+
+/** The one site the text names, if exactly one is closest. */
 export function matchSite(text, sites) {
+  const found = findSites(text, sites);
+  return found.length === 1 ? found[0].site : undefined;
+}
+
+/** A question about whether a site works, rather than a description of a problem. */
+export function asksStatus(text, site) {
   const t = norm(text);
-  return sites.find((s) => {
-    const host = new URL(s.home).hostname.replace(/^www\./, '');
-    return [s.name, s.id, host, host.split('.')[0]].some((w) => new RegExp(`(^|[^a-z0-9])${norm(w).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}($|[^a-z0-9])`).test(t));
-  });
+  if (/\b(status|up|down|online|offline|alive|dead|available|reachable|outage|works?|working|running)\b/.test(t)) return true;
+  // Little more than the site's name: "mangadex?"
+  const names = spellings(site);
+  const left = (t.match(/[a-z0-9]+/g) ?? []).filter((w) => !STOP.has(w) && !/^(about|whats|s|check|site)$/.test(w) && !names.some((n) => n.includes(w)));
+  return left.length <= 1;
+}
+
+/** The probe runs on the hour and the half hour; a run is due once the last result is older than the current slot. */
+const PERIOD_MS = 30 * 60_000;
+const STALE_MS = 2 * 60 * 60_000;
+export function checkPhase(status, now) {
+  const last = Date.parse(status?.checkedAt ?? '');
+  if (Number.isNaN(last)) return { known: false, running: false, stale: false };
+  const stale = now - last > STALE_MS;
+  return { known: true, stale, running: !stale && last < Math.floor(now / PERIOD_MS) * PERIOD_MS };
 }
 
 /** The entries whose keywords appear in the text, best match first. */
@@ -41,12 +138,68 @@ const choices = (list) => list.map((x) => (typeof x === 'string' ? { label: x, v
  * One turn. `input` is the reader's text or chosen value (undefined to start).
  * Returns the new state and what to show: bot lines, then either choices or a text field.
  */
-export function step(state, input, { flows, sites, status }) {
+export function step(state, input, { flows, sites, status, now = Date.now() }) {
   const say = [];
   const s = { ...state };
   const site = () => sites.find((x) => x.id === s.site);
   const vars = () => ({ site: site()?.name ?? 'the site', note: site()?.note ?? '' });
   const listed = sites.filter((x) => ['supported', 'beta', 'rework'].includes(x.status));
+  const siteChoices = () => [...choices(listed.map((x) => ({ id: x.id, label: x.name }))), { label: flows.otherSite, value: '__other' }];
+
+  /** The site is known: answer its status, or start on the problem. */
+  const route = () => (s.intent === 'status' ? statusAnswer() : afterSite());
+  /** The reader's words named a site, several, or none. */
+  const fromText = (text) => {
+    const found = findSites(text, sites);
+    if (found.length === 1) {
+      s.site = found[0].site.id;
+      s.intent = asksStatus(text, found[0].site) ? 'status' : 'problem';
+      if (found[0].off > 0) say.push(fill(flows.takenAs, vars()));
+      return route();
+    }
+    s.intent = /\b(status|up|down|online|offline|working|works?)\b/.test(norm(text)) ? 'status' : 'problem';
+    if (found.length > 1) {
+      s.step = 'pick';
+      say.push(flows.whichOne);
+      return { say, choices: [...choices(found.map(({ site: x }) => ({ id: x.id, label: x.name }))), { label: flows.noneOfThese, value: '__none' }] };
+    }
+    s.step = 'site';
+    say.push(flows.askSite);
+    return { say, choices: siteChoices() };
+  };
+
+  const stateLine = (template, check) => fill(template, { ...vars(), state: STATE_TEXT[check.state], when: when(check.checkedAt) });
+  const statusDone = () => {
+    s.step = 'statusDone';
+    return {
+      say,
+      choices: [
+        { label: flows.problem, value: '__problem' },
+        { label: flows.anotherSite, value: '__another' },
+        { label: flows.restart, value: '__restart' },
+      ],
+    };
+  };
+  /** What the last check said, or a wait for the one running now. */
+  const statusAnswer = () => {
+    const meta = site();
+    if (meta.status === 'skipped' || meta.status === 'planned') return end(fill(flows.states.skipped, vars()));
+    if (meta.status === 'rework') return end(fill(flows.states.rework, vars()));
+    const check = status?.sites?.[meta.id];
+    const phase = checkPhase(status, now);
+    if (phase.running) {
+      s.step = 'waiting';
+      s.waitingFor = status.checkedAt;
+      say.push(check ? stateLine(flows.statusWaiting, check) : fill(flows.statusWaitingNew, vars()));
+      return { say, wait: true, choices: [{ label: flows.stopWaiting, value: '__nowait' }] };
+    }
+    if (!check) say.push(fill(phase.known ? flows.notCheckedYet : flows.states.unknown, vars()));
+    else {
+      say.push(stateLine(flows.statusIs, check));
+      if (phase.stale) say.push(fill(flows.statusStale, { when: when(status.checkedAt) }));
+    }
+    return statusDone();
+  };
 
   const askError = () => {
     s.step = 'error';
@@ -60,7 +213,7 @@ export function step(state, input, { flows, sites, status }) {
     const check = status?.sites?.[meta.id];
     s.checked = check ? `${STATE_TEXT[check.state]}, checked ${when(check.checkedAt)}` : 'not checked yet';
     if (!check) say.push(fill(flows.states.unknown, vars()));
-    else say.push(`${meta.name} is ${STATE_TEXT[check.state]}. Last checked ${when(check.checkedAt)}.`);
+    else say.push(stateLine(flows.statusIs, check));
     if (check?.state === 'down') return end(fill(flows.states.down, vars()));
     return askError();
   };
@@ -77,26 +230,57 @@ export function step(state, input, { flows, sites, status }) {
       say.push(flows.greeting);
       out = { say, text: true };
       break;
-    case 'start': {
+    case 'start':
       s.text = String(input ?? '').slice(0, 2000);
-      const found = matchSite(s.text, sites);
-      if (found) {
-        s.site = found.id;
-        out = afterSite();
-      } else {
+      out = fromText(s.text);
+      break;
+    case 'pick':
+      if (input === '__none' || !sites.some((x) => x.id === input)) {
         s.step = 'site';
         say.push(flows.askSite);
-        out = { say, choices: [...choices(listed.map((x) => ({ id: x.id, label: x.name }))), { label: flows.otherSite, value: '__other' }] };
+        out = { say, choices: siteChoices() };
+        break;
       }
+      s.site = input;
+      out = route();
       break;
-    }
     case 'site':
       if (input === '__other' || !sites.some((x) => x.id === input)) {
         out = end(flows.notListed);
         break;
       }
       s.site = input;
-      out = afterSite();
+      out = route();
+      break;
+    case 'waiting': {
+      // The page polls while this step waits and calls back with '__status' once a new check is in.
+      const check = status?.sites?.[s.site];
+      if (input === '__status' && status?.checkedAt !== s.waitingFor) {
+        say.push(check ? stateLine(flows.statusNew, check) : fill(flows.notCheckedYet, vars()));
+        out = statusDone();
+      } else if (input === '__status') {
+        out = { say, wait: true, choices: [{ label: flows.stopWaiting, value: '__nowait' }] };
+      } else {
+        // The reader stopped waiting, or the check took too long: go by the last result.
+        say.push(check ? stateLine(input === '__timeout' ? flows.waitTimeout : flows.statusIs, check) : fill(flows.notCheckedYet, vars()));
+        out = statusDone();
+      }
+      break;
+    }
+    case 'statusDone':
+      if (input === '__problem') {
+        s.intent = 'problem';
+        out = afterSite();
+      } else if (input === '__another') {
+        s.step = 'another';
+        say.push(flows.askAnother);
+        out = { say, text: true };
+      } else out = step({}, undefined, { flows, sites, status, now });
+      break;
+    case 'another':
+      s.text = String(input ?? '').slice(0, 2000);
+      s.site = undefined;
+      out = fromText(s.text);
       break;
     case 'error':
       s.error = flows.errors.find((e) => e.id === input)?.id ?? 'other';
@@ -123,7 +307,13 @@ export function step(state, input, { flows, sites, status }) {
       say.push(...fixes);
       s.step = 'worked';
       say.push(flows.askWorked);
-      out = { say, choices: [{ label: 'Yes', value: 'yes' }, { label: 'No', value: 'no' }] };
+      out = {
+        say,
+        choices: [
+          { label: 'Yes', value: 'yes' },
+          { label: 'No', value: 'no' },
+        ],
+      };
       break;
     }
     case 'worked':
@@ -226,6 +416,7 @@ if (typeof document !== 'undefined') {
 
   /** Shows the bot's lines one by one, each after a short "typing" moment, then the ways to answer. */
   const show = async (turn) => {
+    stopWaiting();
     state = turn.state;
     options.replaceChildren();
     form.hidden = true;
@@ -270,9 +461,38 @@ if (typeof document !== 'undefined') {
       }),
     );
     form.hidden = !turn.text;
+    if (turn.wait) waitForCheck();
     log.scrollTop = log.scrollHeight;
     (turn.text ? field : options.querySelector('button'))?.focus({ preventScroll: true });
   };
+
+  /** A check is running: dots stay up and the result is fetched every 20 s, for up to 25 minutes. */
+  let waiting = 0;
+  function stopWaiting() {
+    clearInterval(waiting);
+    waiting = 0;
+    log.querySelector('.waiting')?.remove();
+  }
+  function waitForCheck() {
+    const dots = document.createElement('p');
+    dots.className = 'typing waiting';
+    dots.setAttribute('role', 'status');
+    dots.setAttribute('aria-label', 'Waiting for the check');
+    dots.append(document.createElement('i'), document.createElement('i'), document.createElement('i'));
+    add(dots);
+    const started = Date.now();
+    const poll = async () => {
+      if (state.step !== 'waiting') return stopWaiting();
+      if (Date.now() - started > 25 * 60_000) return void show(step(state, '__timeout', data));
+      const next = await get(`${STATUS_URL}?t=${Date.now()}`);
+      if (state.step === 'waiting' && next && next.checkedAt !== state.waitingFor) {
+        data = { ...data, status: next };
+        void show(step(state, '__status', data));
+      }
+    };
+    void poll();
+    waiting = setInterval(poll, 20_000);
+  }
 
   const restart = () => {
     log.replaceChildren();
@@ -292,7 +512,10 @@ if (typeof document !== 'undefined') {
     void answer(v);
   });
 
-  const get = (url) => fetch(url).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+  const get = (url) =>
+    fetch(url)
+      .then((r) => (r.ok ? r.json() : null))
+      .catch(() => null);
   const open = async () => {
     opener = document.activeElement;
     root.hidden = false;
