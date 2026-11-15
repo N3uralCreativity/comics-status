@@ -1,0 +1,89 @@
+{
+  "v": 1,
+  "greeting": "Tell me what went wrong, in your own words. Name the site if you can.",
+  "askSite": "Which site was it?",
+  "otherSite": "Another site",
+  "notListed": "Comix Downloader only works on the sites listed on this page. If you'd like a site added, open an issue on GitHub and name it.",
+  "askError": "What does the extension or the site show?",
+  "askBrowser": "Which browser are you using?",
+  "askSystem": "And which system?",
+  "askAction": "What were you doing when it happened?",
+  "askWorked": "Did that fix it?",
+  "worked": "Good. Happy reading.",
+  "askVersion": "Let's write a report you can file. What version does the extension show at the bottom of its Settings tab? It looks like 5.0.0.",
+  "badVersion": "That doesn't look like a version number. It's at the bottom of the Settings tab, like 5.0.0. Type it, or type \"don't know\".",
+  "askSeries": "Paste the address of the series page you were on, or skip this.",
+  "skip": "Skip",
+  "report": "Here's your report. The button opens GitHub with it filled in: you'll need a GitHub account, then press \"Create\". Nothing you typed here leaves this page until you open that link.",
+  "restart": "Start over",
+  "browsers": ["Chrome", "Edge", "Opera", "Firefox", "Firefox for Android", "Other"],
+  "systems": ["Windows", "macOS", "Linux", "Android", "ChromeOS", "Other"],
+  "states": {
+    "down": "{site} is down right now, so the extension can't reach it either. There's nothing to fix on your side; try again once the page shows it working.",
+    "rework": "{site} is under rework: {note}",
+    "skipped": "{site} isn't supported: {note}",
+    "unknown": "I couldn't load the latest check for {site}, so I'll go by what you tell me."
+  },
+  "actions": [
+    { "id": "single", "label": "Downloading one chapter", "keywords": ["one chapter", "a chapter", "single", "this chapter"] },
+    { "id": "select", "label": "Downloading picked chapters", "keywords": ["picked", "selected", "checkbox", "some chapters", "several"] },
+    { "id": "all", "label": "Downloading all chapters", "keywords": ["download all", "all chapters", "whole series", "every chapter"] },
+    { "id": "buttons", "label": "Looking for the buttons on the site", "keywords": ["button", "buttons", "checkbox", "don't see", "not showing", "missing button", "no download"] }
+  ],
+  "errors": [
+    {
+      "id": "check",
+      "label": "It asks me to pass a browser check",
+      "keywords": ["browser check", "verify", "human", "captcha", "cloudflare", "just a moment", "turnstile", "pass the check"],
+      "fixes": [
+        "Open {site} in a normal tab and pass its check there. Then open the extension's Downloads tab and press Resume.",
+        "If it asks again right away, switch Pace to Gentle in Settings, wait a few minutes, and resume."
+      ]
+    },
+    {
+      "id": "http",
+      "label": "An error with 403 or 429 in it",
+      "keywords": ["403", "429", "forbidden", "too many", "rate limit", "refused", "http"],
+      "fixes": [
+        "The site is refusing requests for a while. Switch Pace to Gentle in Settings, wait about ten minutes, then press Try missed chapters again in the Downloads tab.",
+        "Open {site} in a tab and check that you can read the chapter there yourself."
+      ]
+    },
+    {
+      "id": "permission",
+      "label": "It says the site isn't allowed yet",
+      "keywords": ["allow", "permission", "access", "not allowed", "grant"],
+      "fixes": [
+        "Open the extension's Sites tab and press Allow next to {site}, then accept the browser's prompt.",
+        "Reload the {site} tab afterwards so the buttons can appear."
+      ]
+    },
+    {
+      "id": "nothing",
+      "label": "Nothing happens",
+      "keywords": ["nothing happens", "nothing", "stuck", "doesn't start", "won't start", "no response", "loading forever", "frozen"],
+      "fixes": [
+        "Reload the {site} tab, then open the extension's This tab view and try from there.",
+        "Check the Downloads tab: a job may be waiting for you to pass a browser check or to resume."
+      ]
+    },
+    {
+      "id": "file",
+      "label": "The file won't open or pages are missing",
+      "keywords": ["corrupt", "won't open", "can't open", "broken file", "missing pages", "blank", "empty file", "zip", "cbz", "pdf"],
+      "fixes": [
+        "Download the chapter again; if pages failed, the Downloads tab offers Try missed chapters again.",
+        "If a CBZ won't open, try the same chapter as ZIP (File format in This tab) to see whether the reader app is the problem."
+      ]
+    },
+    {
+      "id": "other",
+      "label": "Something else",
+      "keywords": [],
+      "fixes": [
+        "Reload the {site} tab and try once more; sites change their pages now and then.",
+        "If it still fails, the next step writes a report with everything needed to look into it."
+      ]
+    }
+  ]
+}

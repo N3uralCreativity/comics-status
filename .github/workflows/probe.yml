@@ -1,0 +1,39 @@
+# Runs in the public status repo: checks every site and writes status.json to the gist the page reads.
+name: Probe
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+    - cron: '17 4 * * 1' # weekly keepalive, below
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: probe
+
+jobs:
+  probe:
+    if: github.event.schedule != '17 4 * * 1'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: node probe.mjs
+        env:
+          GIST_TOKEN: ${{ secrets.GIST_TOKEN }}
+
+  # GitHub switches off scheduled workflows in a public repo after 60 days without activity.
+  # Enabling the workflow again counts as activity.
+  keepalive:
+    if: github.event.schedule == '17 4 * * 1'
+    runs-on: ubuntu-latest
+    steps:
+      - run: gh api -X PUT "repos/${{ github.repository }}/actions/workflows/probe.yml/enable"
+        env:
+          GH_TOKEN: ${{ github.token }}

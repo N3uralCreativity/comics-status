@@ -1,0 +1,1545 @@
+[
+  {
+    "id": "chikari",
+    "name": "chikari.moe",
+    "home": "https://chikari.moe",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": true
+    },
+    "note": "Its own downloads stay inside the site; the extension adds ZIP, CBZ and PDF files.",
+    "probe": {
+      "url": "https://chikari.moe/",
+      "expect": "chikari"
+    }
+  },
+  {
+    "id": "cubari",
+    "name": "Cubari",
+    "home": "https://cubari.moe",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": true
+    },
+    "note": "Works with the series Cubari reads from MangaDex, gist and imgur links.",
+    "probe": {
+      "url": "https://cubari.moe/",
+      "expect": "Cubari"
+    }
+  },
+  {
+    "id": "mangaball",
+    "name": "Mangaball",
+    "home": "https://mangaball.com",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": true
+    },
+    "note": "Collects chapters from many sites and languages; pick a group to choose the language.",
+    "probe": {
+      "url": "https://mangaball.com/",
+      "expect": "MangaBall"
+    }
+  },
+  {
+    "id": "mangadna",
+    "name": "MangaDNA",
+    "home": "https://mangadna.com",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": false
+    },
+    "probe": {
+      "url": "https://mangadna.com/",
+      "expect": "MangaDNA"
+    }
+  },
+  {
+    "id": "mangademon",
+    "name": "Manga Demon",
+    "home": "https://demonicscans.org",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": false
+    },
+    "probe": {
+      "url": "https://demonicscans.org/",
+      "expect": "Demonic"
+    }
+  },
+  {
+    "id": "mangahub",
+    "name": "MangaHub",
+    "home": "https://mangahub.io",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": false
+    },
+    "probe": {
+      "url": "https://mangahub.io/",
+      "expect": "MangaHub"
+    }
+  },
+  {
+    "id": "mangageko",
+    "name": "MangaGeko",
+    "home": "https://www.mgeko.cc",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": false
+    },
+    "probe": {
+      "url": "https://www.mgeko.cc/",
+      "expect": "mgeko"
+    }
+  },
+  {
+    "id": "mangak",
+    "name": "MangaK",
+    "home": "https://mangak.io",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": false
+    },
+    "probe": {
+      "url": "https://mangak.io/",
+      "expect": "MangaK"
+    }
+  },
+  {
+    "id": "mangade",
+    "name": "MangaDE",
+    "home": "https://mangade.io",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": false
+    },
+    "probe": {
+      "url": "https://mangade.io/home",
+      "expect": "MangaDE"
+    }
+  },
+  {
+    "id": "mangadex",
+    "name": "MangaDex",
+    "home": "https://mangadex.org",
+    "status": "beta",
+    "ui": "panel",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": true
+    },
+    "note": "Lists chapters in your browser’s language and in English; pick a group in the panel to choose one version.",
+    "probe": {
+      "url": "https://mangadex.org/",
+      "expect": "MangaDex"
+    }
+  },
+  {
+    "id": "mangapill",
+    "name": "Mangapill",
+    "home": "https://mangapill.com",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": false
+    },
+    "probe": {
+      "url": "https://mangapill.com/",
+      "expect": "Mangapill"
+    }
+  },
+  {
+    "id": "mangatown",
+    "name": "MangaTown",
+    "home": "https://www.mangatown.com",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": false
+    },
+    "note": "Chapters read one page at a time, so a chapter takes a few seconds per 10 pages.",
+    "probe": {
+      "url": "https://www.mangatown.com/",
+      "expect": "MangaTown"
+    }
+  },
+  {
+    "id": "manganato",
+    "name": "MangaNato",
+    "home": "https://www.manganato.gg",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": false
+    },
+    "probe": {
+      "url": "https://www.manganato.gg/",
+      "expect": "MangaNato"
+    }
+  },
+  {
+    "id": "manhuabuddy",
+    "name": "ManhuaBuddy",
+    "home": "https://manhuabuddy.com",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": false
+    },
+    "probe": {
+      "url": "https://manhuabuddy.com/",
+      "expect": "Manhuabuddy"
+    }
+  },
+  {
+    "id": "manhwa18",
+    "name": "Manhwa18.cc",
+    "home": "https://manhwa18.cc",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": false
+    },
+    "adult": true,
+    "probe": {
+      "url": "https://manhwa18.cc/",
+      "expect": "Manhwa18"
+    }
+  },
+  {
+    "id": "raw1001",
+    "name": "raw1001",
+    "home": "https://raw1001.net",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": false
+    },
+    "probe": {
+      "url": "https://raw1001.net/",
+      "expect": "raw1001"
+    }
+  },
+  {
+    "id": "rawkuma",
+    "name": "Rawkuma",
+    "home": "https://rawkuma.net",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": false
+    },
+    "probe": {
+      "url": "https://rawkuma.net/",
+      "expect": "Rawkuma"
+    }
+  },
+  {
+    "id": "mangarawjp",
+    "name": "漫画 raw (MangaRawJP)",
+    "home": "https://mangarawjp.net",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": false
+    },
+    "probe": {
+      "url": "https://mangarawjp.net/",
+      "expect": "mangarawjp"
+    }
+  },
+  {
+    "id": "mangaraw",
+    "name": "MangaRaw",
+    "home": "https://mangaraw.co.uk",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": false
+    },
+    "probe": {
+      "url": "https://mangaraw.co.uk/",
+      "expect": "MangaRaw"
+    }
+  },
+  {
+    "id": "toonkotsu",
+    "name": "Toonkotsu",
+    "home": "https://toonkotsu.com",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": true
+    },
+    "note": "Most chapters come from several groups; pick one in the panel. After a number of chapters the site asks you to confirm you are human: do that on the site, then resume.",
+    "probe": {
+      "url": "https://toonkotsu.com/",
+      "expect": "Toonkotsu"
+    }
+  },
+  {
+    "id": "twmanga",
+    "name": "Twmanga",
+    "home": "https://www.twmanga.com",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": false
+    },
+    "note": "A mirror of Baozi Manhua (baozimh.com), whose own pages sit behind a browser check.",
+    "probe": {
+      "url": "https://www.twmanga.com/",
+      "expect": "包子"
+    }
+  },
+  {
+    "id": "vymanga",
+    "name": "VyManga",
+    "home": "https://mangavyvy.net",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": false
+    },
+    "probe": {
+      "url": "https://mangavyvy.net/",
+      "expect": "VyManga"
+    }
+  },
+  {
+    "id": "weebcentral",
+    "name": "Weeb Central",
+    "home": "https://weebcentral.com",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": false
+    },
+    "probe": {
+      "url": "https://weebcentral.com/",
+      "expect": "Weeb Central"
+    }
+  },
+  {
+    "id": "weloma",
+    "name": "WeLoMa",
+    "home": "https://weloma.art",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": false
+    },
+    "probe": {
+      "url": "https://weloma.art/",
+      "expect": "WeLoMa"
+    }
+  },
+  {
+    "id": "nihonkuni",
+    "name": "NihonKuni",
+    "home": "https://nihonkuni.com",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": false
+    },
+    "probe": {
+      "url": "https://nihonkuni.com/",
+      "expect": "NihonKuni"
+    }
+  },
+  {
+    "id": "xcomic",
+    "name": "XComic",
+    "home": "https://xcomic.me",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": false
+    },
+    "note": "Download from a source page: each language or uploader edition of a title is its own source.",
+    "probe": {
+      "url": "https://xcomic.me/",
+      "expect": "XCOMIC"
+    }
+  },
+  {
+    "id": "zinmanga",
+    "name": "Zinmanga",
+    "home": "https://www.zinmanga.net",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": false
+    },
+    "probe": {
+      "url": "https://www.zinmanga.net/",
+      "expect": "zinmanga.net"
+    }
+  },
+  {
+    "id": "comix",
+    "name": "Comix",
+    "home": "https://comix.to",
+    "status": "beta",
+    "ui": "panel",
+    "features": {
+      "single": true,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "Open a chapter, scroll through it to the end, then save it from the panel. One chapter at a time: comix keeps its chapter data to its own reader, so the extension saves what the reader has shown you.",
+    "probe": {
+      "url": "https://comix.to",
+      "expect": "comix"
+    }
+  },
+  {
+    "id": "manhuaplus",
+    "name": "ManhuaPlus",
+    "home": "https://manhuaplus.com",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": false
+    },
+    "probe": {
+      "url": "https://manhuaplus.com/",
+      "expect": "manhuaplus.com"
+    }
+  },
+  {
+    "id": "manhwanex",
+    "name": "Manhwanex",
+    "home": "https://manhwanex.com",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": false
+    },
+    "probe": {
+      "url": "https://manhwanex.com/",
+      "expect": "manhwanex.com"
+    }
+  },
+  {
+    "id": "mangasushi",
+    "name": "Mangasushi",
+    "home": "https://mangasushi.org",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": false
+    },
+    "probe": {
+      "url": "https://mangasushi.org/",
+      "expect": "mangasushi.org"
+    }
+  },
+  {
+    "id": "mangaread",
+    "name": "MangaRead",
+    "home": "https://www.mangaread.org",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": false
+    },
+    "probe": {
+      "url": "https://www.mangaread.org/",
+      "expect": "mangaread.org"
+    }
+  },
+  {
+    "id": "manhuahot",
+    "name": "Manhua Hot",
+    "home": "https://manhuahot.com",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": false
+    },
+    "probe": {
+      "url": "https://manhuahot.com/",
+      "expect": "manhuahot.com"
+    }
+  },
+  {
+    "id": "aquamanga",
+    "name": "Aqua Manga",
+    "home": "https://aquareader.org",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": false
+    },
+    "probe": {
+      "url": "https://aquareader.org/",
+      "expect": "aquareader.org"
+    }
+  },
+  {
+    "id": "rawdevart",
+    "name": "Rawdevart",
+    "home": "https://rawdevart.art",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": false
+    },
+    "probe": {
+      "url": "https://rawdevart.art/",
+      "expect": "rawdevart.art"
+    }
+  },
+  {
+    "id": "rawsakura",
+    "name": "RawSakura",
+    "home": "https://rawsakura.org",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": false
+    },
+    "probe": {
+      "url": "https://rawsakura.org/",
+      "expect": "rawsakura.org"
+    }
+  },
+  {
+    "id": "mangamikan",
+    "name": "MangaMikan",
+    "home": "https://mangamikan.com",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": false
+    },
+    "probe": {
+      "url": "https://mangamikan.com/",
+      "expect": "MangaMikan"
+    }
+  },
+  {
+    "id": "mangacherri",
+    "name": "MangaCherri",
+    "home": "https://mangacherri.com",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": false
+    },
+    "probe": {
+      "url": "https://mangacherri.com/",
+      "expect": "MangaCherri"
+    }
+  },
+  {
+    "id": "mangaberri",
+    "name": "MangaBerri",
+    "home": "https://mangaberri.com",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": false
+    },
+    "probe": {
+      "url": "https://mangaberri.com/",
+      "expect": "MangaBerri"
+    }
+  },
+  {
+    "id": "atsumaru",
+    "name": "Atsumaru",
+    "home": "https://atsu.moe",
+    "status": "skipped",
+    "skipReason": "own-downloads",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "Atsumaru already lets readers download chapters as CBZ."
+  },
+  {
+    "id": "dynasty",
+    "name": "Dynasty Reader",
+    "home": "https://dynasty-scans.com",
+    "status": "skipped",
+    "skipReason": "own-downloads",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "Dynasty Reader already lets readers download chapters."
+  },
+  {
+    "id": "mangakatana",
+    "name": "MangaKatana",
+    "home": "https://mangakatana.com",
+    "status": "skipped",
+    "skipReason": "own-downloads",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "MangaKatana already lets readers download chapters, ten at a time, from its \"Read offline\" page."
+  },
+  {
+    "id": "mangadot",
+    "name": "Mangadot",
+    "home": "https://mangadot.net",
+    "status": "skipped",
+    "skipReason": "challenge",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "Mangadot puts a browser check in front of every page and its API."
+  },
+  {
+    "id": "onisaga",
+    "name": "OniSaga",
+    "home": "https://onisaga.com",
+    "status": "skipped",
+    "skipReason": "challenge",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "OniSaga puts a browser check in front of its pages."
+  },
+  {
+    "id": "mangacloud",
+    "name": "MangaCloud",
+    "home": "https://mangacloud.org",
+    "status": "skipped",
+    "skipReason": "challenge",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "MangaCloud asks for a human check before its API answers."
+  },
+  {
+    "id": "toonz",
+    "name": "Toonz",
+    "home": "https://toonz.to",
+    "status": "skipped",
+    "skipReason": "challenge",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "Toonz puts a browser check in front of its series and chapter pages."
+  },
+  {
+    "id": "mangafire",
+    "name": "MangaFire",
+    "home": "https://mangafire.to",
+    "status": "skipped",
+    "skipReason": "signed-api",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "MangaFire only answers requests signed by its own reader."
+  },
+  {
+    "id": "yaoime",
+    "name": "yaoi.me",
+    "home": "https://yaoi.me",
+    "status": "skipped",
+    "skipReason": "signed-api",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "yaoi.me only answers requests signed by its own reader."
+  },
+  {
+    "id": "swarm",
+    "name": "Swarm",
+    "home": "https://swarm.ws",
+    "status": "skipped",
+    "skipReason": "signed-api",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "Swarm only answers requests signed by its own reader."
+  },
+  {
+    "id": "mangataro",
+    "name": "MangaTaro",
+    "home": "https://mangataro.org",
+    "status": "skipped",
+    "skipReason": "signed-api",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "MangaTaro only gives its chapter lists to its own reader."
+  },
+  {
+    "id": "mangago",
+    "name": "Mangago",
+    "home": "https://mangago.me",
+    "status": "skipped",
+    "skipReason": "signed-api",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "Mangago hides its page lists inside scrambled reader code."
+  },
+  {
+    "id": "mangapark",
+    "name": "MangaPark",
+    "home": "https://mangapark.net",
+    "status": "skipped",
+    "skipReason": "offline",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "No working MangaPark site was found."
+  },
+  {
+    "id": "danke",
+    "name": "Danke fürs Lesen",
+    "home": "https://danke.moe",
+    "status": "skipped",
+    "skipReason": "own-downloads",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "Danke fürs Lesen already lets readers download each chapter as a ZIP."
+  },
+  {
+    "id": "hachirumi",
+    "name": "Hachirumi",
+    "home": "https://hachirumi.com",
+    "status": "skipped",
+    "skipReason": "own-downloads",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "Hachirumi already lets readers download each chapter as a ZIP."
+  },
+  {
+    "id": "mangafreak",
+    "name": "MangaFreak",
+    "home": "https://ww3.mangafreak.me",
+    "status": "skipped",
+    "skipReason": "own-downloads",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "MangaFreak already lets readers download chapters as ZIP files."
+  },
+  {
+    "id": "mangakawaii",
+    "name": "Mangakawaii",
+    "home": "https://www.mangakawaii.fr",
+    "status": "skipped",
+    "skipReason": "own-downloads",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "Mangakawaii already lets readers download up to 20 chapters at once as ZIP or CBZ."
+  },
+  {
+    "id": "mangahome",
+    "name": "MangaHome",
+    "home": "https://www.mangahome.com",
+    "status": "skipped",
+    "skipReason": "signed-api",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "MangaHome builds its page addresses with a key from scrambled reader code."
+  },
+  {
+    "id": "mangafox",
+    "name": "Mangafox",
+    "home": "https://fanfox.net",
+    "status": "skipped",
+    "skipReason": "signed-api",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "Mangafox builds its page addresses with a key from scrambled reader code."
+  },
+  {
+    "id": "mangastash",
+    "name": "Mangastash",
+    "home": "https://mangastash.org",
+    "status": "skipped",
+    "skipReason": "signed-api",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "Mangastash’s image server only answers its own reader."
+  },
+  {
+    "id": "mkissa",
+    "name": "MKissa Manga",
+    "home": "https://mkissa.to",
+    "status": "skipped",
+    "skipReason": "signed-api",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "MKissa only answers requests from its own reader and sends its page lists encrypted."
+  },
+  {
+    "id": "rawlazy",
+    "name": "RawLazy",
+    "home": "https://rawlazy.io",
+    "status": "skipped",
+    "skipReason": "signed-api",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "RawLazy only sends its pages to its own reader, a few at a time, against a token in the page."
+  },
+  {
+    "id": "rawfree",
+    "name": "RawFree",
+    "home": "https://rawfree.date",
+    "status": "skipped",
+    "skipReason": "signed-api",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "RawFree only sends its pages to its own reader, a few at a time, against a token in the page."
+  },
+  {
+    "id": "rawotaku",
+    "name": "RawOtaku",
+    "home": "https://rawotaku.com",
+    "status": "skipped",
+    "skipReason": "signed-api",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "RawOtaku loads its pages through scrambled reader code."
+  },
+  {
+    "id": "komix",
+    "name": "Komix",
+    "home": "https://komix.to",
+    "status": "skipped",
+    "skipReason": "signed-api",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "Komix serves each page through a one-time token and its own reader code."
+  },
+  {
+    "id": "webnex",
+    "name": "Webnex",
+    "home": "https://webnex.cc",
+    "status": "skipped",
+    "skipReason": "challenge",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "Webnex refuses automated access to its reader."
+  },
+  {
+    "id": "reimanga",
+    "name": "ReiManga",
+    "home": "https://reimanga.net",
+    "status": "skipped",
+    "skipReason": "challenge",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "ReiManga puts a browser check in front of its series pages."
+  },
+  {
+    "id": "baozi",
+    "name": "Baozi Manhua",
+    "home": "https://www.baozimh.com",
+    "status": "skipped",
+    "skipReason": "challenge",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "Baozi Manhua puts a browser check in front of its pages; its mirror Twmanga is supported."
+  },
+  {
+    "id": "comico",
+    "name": "comico.moe",
+    "home": "https://comico.moe",
+    "status": "skipped",
+    "skipReason": "own-downloads",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "comico.moe already lets signed-in readers download chapters."
+  },
+  {
+    "id": "senmanga",
+    "name": "SenManga",
+    "home": "https://raw.senmanga.com",
+    "status": "skipped",
+    "skipReason": "offline",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "SenManga’s reader isn’t working: its chapter pages fail to load."
+  },
+  {
+    "id": "nicomanga",
+    "name": "Nicomanga",
+    "home": "https://nicomanga.com",
+    "status": "skipped",
+    "skipReason": "signed-api",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "Nicomanga scrambles the data its pages are built from."
+  },
+  {
+    "id": "readmanga",
+    "name": "ReadManga",
+    "home": "https://b.zazaza.me",
+    "status": "skipped",
+    "skipReason": "signed-api",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "ReadManga’s page addresses expire within minutes and its image server answers with a non-standard status."
+  },
+  {
+    "id": "mangalink",
+    "name": "Mangalink",
+    "home": "https://link-manga.net",
+    "status": "skipped",
+    "skipReason": "challenge",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "Mangalink puts a browser check in front of its series pages."
+  },
+  {
+    "id": "mangaraw4u",
+    "name": "MangaRaw4u",
+    "home": "https://mangaraw4u.com",
+    "status": "skipped",
+    "skipReason": "offline",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "MangaRaw4u’s server keeps timing out."
+  },
+  {
+    "id": "kdtscans",
+    "name": "KDT Scans",
+    "home": "https://kdtscans.com",
+    "status": "skipped",
+    "skipReason": "offline",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "KDT Scans’ address now redirects to ads."
+  },
+  {
+    "id": "kt9",
+    "name": "KT9",
+    "home": "https://kt9.com",
+    "status": "skipped",
+    "skipReason": "offline",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "No working KT9 site was found."
+  },
+  {
+    "id": "yaoiscan",
+    "name": "Yaoiscan",
+    "home": "https://yaoiscan.com",
+    "status": "skipped",
+    "skipReason": "challenge",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "Yaoiscan puts a browser check in front of its pages."
+  },
+  {
+    "id": "hachiraw",
+    "name": "Hachiraw",
+    "home": "https://hachiraw.net",
+    "status": "skipped",
+    "skipReason": "challenge",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "Hachiraw puts a browser check in front of its pages."
+  },
+  {
+    "id": "mangabay",
+    "name": "MangaBay",
+    "home": "https://manga-bay.biz",
+    "status": "skipped",
+    "skipReason": "challenge",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "MangaBay puts a browser check in front of its pages."
+  },
+  {
+    "id": "spoilerplus",
+    "name": "Spoilerplus",
+    "home": "https://spoilerplus.tv",
+    "status": "skipped",
+    "skipReason": "challenge",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "Spoilerplus blocks visitors at a browser check."
+  },
+  {
+    "id": "lilymanga",
+    "name": "Lilymanga",
+    "home": "https://lilymanga.net",
+    "status": "skipped",
+    "skipReason": "offline",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "Lilymanga’s server is down."
+  },
+  {
+    "id": "todaymanga",
+    "name": "Todaymanga",
+    "home": "https://todaymanga.com",
+    "status": "skipped",
+    "skipReason": "offline",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "Todaymanga’s server is down."
+  },
+  {
+    "id": "mangadoom",
+    "name": "MangaDoom",
+    "home": "https://mngdoom.com",
+    "status": "skipped",
+    "skipReason": "offline",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "MangaDoom’s address now hosts a gambling site."
+  },
+  {
+    "id": "godacomic",
+    "name": "GodaComic",
+    "home": "https://godacomic.com",
+    "status": "skipped",
+    "skipReason": "offline",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "GodaComic doesn’t answer."
+  },
+  {
+    "id": "justmanga",
+    "name": "JustManga",
+    "home": "https://justmanga.org",
+    "status": "skipped",
+    "skipReason": "offline",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "JustManga doesn’t answer."
+  },
+  {
+    "id": "ninekon",
+    "name": "Ninekon",
+    "home": "https://ninekon.com",
+    "status": "skipped",
+    "skipReason": "offline",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "Ninekon’s address now hosts another site."
+  },
+  {
+    "id": "likemanga",
+    "name": "LikeManga",
+    "home": "https://likemanga.io",
+    "status": "skipped",
+    "skipReason": "offline",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "No working LikeManga site was found; its old addresses redirect elsewhere."
+  },
+  {
+    "id": "coolmic",
+    "name": "Coolmic",
+    "home": "https://coolmic.me",
+    "status": "skipped",
+    "skipReason": "drm",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "Coolmic is an official store; it isn’t supported."
+  },
+  {
+    "id": "omoi",
+    "name": "Omoi",
+    "home": "https://www.omoi.com",
+    "status": "skipped",
+    "skipReason": "drm",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "Omoi is an official store; it isn’t supported."
+  },
+  {
+    "id": "mangamirai",
+    "name": "Manga Mirai",
+    "home": "https://mangamirai.com",
+    "status": "skipped",
+    "skipReason": "drm",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "Manga Mirai is an official store; it isn’t supported."
+  },
+  {
+    "id": "jpbookstore",
+    "name": "JP Book Store",
+    "home": "https://jpbookstore.com",
+    "status": "skipped",
+    "skipReason": "drm",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "JP Book Store is an official store; it isn’t supported."
+  },
+  {
+    "id": "kmanga",
+    "name": "K MANGA",
+    "home": "https://kmanga.kodansha.com",
+    "status": "skipped",
+    "skipReason": "drm",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "K MANGA is an official store; it isn’t supported."
+  },
+  {
+    "id": "pixivcomics",
+    "name": "Pixiv Comics",
+    "home": "https://comic.pixiv.net",
+    "status": "skipped",
+    "skipReason": "drm",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "Pixiv Comics is an official store; it isn’t supported."
+  },
+  {
+    "id": "inkr",
+    "name": "INKR",
+    "home": "https://comics.inkr.com",
+    "status": "skipped",
+    "skipReason": "drm",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "INKR is an official store; it isn’t supported."
+  },
+  {
+    "id": "mangaplaza",
+    "name": "MangaPlaza",
+    "home": "https://mangaplaza.com",
+    "status": "skipped",
+    "skipReason": "drm",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "MangaPlaza is an official store; it isn’t supported."
+  },
+  {
+    "id": "bookwalker",
+    "name": "Bookwalker",
+    "home": "https://global.bookwalker.jp",
+    "status": "skipped",
+    "skipReason": "drm",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "Bookwalker is an official store; it isn’t supported."
+  },
+  {
+    "id": "kobo",
+    "name": "Rakuten Kobo",
+    "home": "https://www.kobo.com",
+    "status": "skipped",
+    "skipReason": "drm",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "Rakuten Kobo is an official store; it isn’t supported."
+  },
+  {
+    "id": "mangaplus",
+    "name": "MANGA Plus",
+    "home": "https://mangaplus.shueisha.co.jp",
+    "status": "skipped",
+    "skipReason": "drm",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "MANGA Plus is an official store; it isn’t supported."
+  }
+]

@@ -1,0 +1,575 @@
+/* The status page. Dark only: <html data-theme="dark"> picks the dark tokens from tokens.css. */
+
+@font-face {
+  font-family: 'Zen Kaku Gothic New';
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/zen-kaku-gothic-new-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Zen Kaku Gothic New';
+  font-weight: 700;
+  font-display: swap;
+  src: url('fonts/zen-kaku-gothic-new-700.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Zen Kaku Gothic New';
+  font-weight: 900;
+  font-display: swap;
+  src: url('fonts/zen-kaku-gothic-new-900.woff2') format('woff2');
+}
+
+:root {
+  --site-font: 'Zen Kaku Gothic New', var(--font);
+  --measure: 46rem;
+  --page: #151819;
+  /* One colour per state; each always sits next to its word. */
+  --up: #5bbf86;
+  --check: var(--warn);
+  --down: var(--danger);
+  --idle: var(--ink-3);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Layout rules below set display; hidden must still win. */
+[hidden] {
+  display: none !important;
+}
+
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font: 400 1rem/1.6 var(--site-font);
+  font-variant-numeric: tabular-nums;
+  -webkit-text-size-adjust: 100%;
+}
+
+a {
+  color: var(--accent);
+  text-underline-offset: 0.18em;
+}
+a:hover {
+  color: var(--accent-strong);
+}
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.masthead,
+main,
+.colophon {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* Masthead */
+
+.masthead {
+  padding-top: 40px;
+}
+.brand {
+  color: var(--ink-2);
+  font-weight: 700;
+  text-decoration: none;
+}
+.brand:hover {
+  color: var(--ink);
+}
+h1 {
+  margin: 6px 0 12px;
+  font-size: clamp(2rem, 6vw, 3.25rem);
+  font-weight: 900;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+}
+.lede {
+  margin: 0;
+  max-width: 38em;
+  color: var(--ink-2);
+}
+
+.clock {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: start;
+  gap: 8px 40px;
+  margin: 24px 0 0;
+}
+.clock dt {
+  color: var(--ink-3);
+  font-size: 0.875rem;
+}
+.clock dd {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+.alert {
+  margin: 16px 0 0;
+  padding: 10px 14px;
+  border: 1px solid var(--warn);
+  border-radius: var(--radius);
+  color: var(--warn);
+}
+
+h2 {
+  margin: 40px 0 12px;
+  font-size: 1.25rem;
+  font-weight: 900;
+}
+
+/* Site rows: name on the left, state on the right, details below. */
+
+.sites {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--paper);
+}
+.site {
+  padding: 16px 20px;
+}
+.site + .site {
+  border-top: 1px solid var(--rule);
+}
+.line {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+}
+.name {
+  font-size: 1.375rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+.name a {
+  color: var(--ink);
+  text-decoration: none;
+}
+.name a:hover {
+  text-decoration: underline;
+}
+.tag {
+  padding: 0 6px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 2px;
+  color: var(--ink-3);
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+.state {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+.state::before {
+  content: '';
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.state[data-state='up'] {
+  color: var(--up);
+}
+.state[data-state='challenge'] {
+  color: var(--check);
+}
+.state[data-state='down'] {
+  color: var(--down);
+}
+.state[data-state='rework'],
+.state[data-state='unknown'],
+.state[data-state='unchecked'] {
+  color: var(--idle);
+}
+.state[data-state='unknown']::before,
+.state[data-state='unchecked']::before {
+  background: none;
+  box-shadow: inset 0 0 0 2px currentColor;
+}
+/* While a run is out: a small spinner in place of the dot. */
+.state[data-state='checking'] {
+  color: var(--ink-2);
+}
+.state[data-state='checking']::before {
+  background: none;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .state[data-state='checking']::before {
+    animation: none;
+  }
+}
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--ink-2);
+  font-size: 0.875rem;
+}
+.feature {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.feature::before {
+  content: '';
+  width: 0.7em;
+  height: 0.38em;
+  border-left: 2px solid var(--up);
+  border-bottom: 2px solid var(--up);
+  transform: translateY(-0.15em) rotate(-45deg);
+}
+.feature.no {
+  color: var(--ink-3);
+  text-decoration: line-through;
+}
+.feature.no::before {
+  height: 0;
+  border-left: 0;
+  border-bottom-color: var(--ink-3);
+  transform: none;
+}
+.note,
+.since {
+  margin: 6px 0 0;
+  color: var(--ink-2);
+  font-size: 0.875rem;
+}
+.since {
+  color: var(--ink-3);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Sites that are not supported: quieter rows, the reason in place of a state. */
+
+.skipped .site {
+  padding: 12px 20px;
+}
+.skipped .name {
+  font-size: 1rem;
+}
+.skipped .note {
+  margin-top: 2px;
+}
+
+/* The helper: a launcher in the corner that opens a chat window. */
+
+.open-bot {
+  margin-top: 12px;
+  min-height: 40px;
+  padding: 6px 16px;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: var(--accent-ink);
+  font: 700 0.9375rem/1.3 var(--site-font);
+  cursor: pointer;
+}
+
+.bot-launcher {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-ink);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+.bot-launcher:hover {
+  transform: scale(1.06);
+}
+.bot-launcher[aria-expanded='true'] {
+  display: none;
+}
+
+.bot {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 21;
+  display: flex;
+  flex-direction: column;
+  width: min(390px, calc(100vw - 40px));
+  height: min(620px, calc(100vh - 40px));
+  border: 1px solid var(--rule-strong);
+  border-radius: 12px;
+  background: var(--paper);
+  overflow: hidden;
+}
+.bot-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 12px 12px 16px;
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.bot-avatar {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--accent-ink);
+  color: var(--accent);
+}
+.bot-avatar path[stroke] {
+  stroke: var(--accent-ink);
+}
+.bot-who {
+  flex: 1;
+  min-width: 0;
+}
+.bot-who h2 {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.3;
+}
+.bot-who p {
+  margin: 0;
+  font-size: 0.8125rem;
+  opacity: 0.8;
+}
+.bot-head button {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+.bot-head button:hover {
+  background: rgb(0 0 0 / 0.12);
+}
+.bot-head :focus-visible {
+  outline-color: var(--accent-ink);
+}
+
+.log {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+}
+.msg {
+  max-width: 85%;
+  width: fit-content;
+  margin: 0 0 8px;
+  padding: 8px 12px;
+  border-radius: 14px;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  white-space: pre-line;
+}
+.msg.from-bot {
+  border-bottom-left-radius: 4px;
+  background: var(--paper-sunk);
+}
+.msg.from-you {
+  margin-left: auto;
+  border-bottom-right-radius: 4px;
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.typing {
+  display: flex;
+  gap: 4px;
+  width: fit-content;
+  margin: 0 0 8px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border-bottom-left-radius: 4px;
+  background: var(--paper-sunk);
+}
+.typing i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ink-3);
+  animation: typing 0.9s infinite ease-in-out;
+}
+.typing i:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.typing i:nth-child(3) {
+  animation-delay: 0.3s;
+}
+@keyframes typing {
+  0%,
+  60%,
+  100% {
+    opacity: 0.35;
+  }
+  30% {
+    opacity: 1;
+  }
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0 16px 12px;
+}
+.options:empty {
+  display: none;
+}
+.options button,
+.report button,
+.report .button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 4px 14px;
+  border: 1px solid var(--accent);
+  border-radius: 18px;
+  background: transparent;
+  color: var(--accent);
+  font: 700 0.875rem/1.3 var(--site-font);
+  text-decoration: none;
+  cursor: pointer;
+}
+.options button:hover,
+.report button:hover {
+  background: var(--accent-wash);
+}
+
+.bot-input {
+  display: flex;
+  gap: 8px;
+  padding: 10px 12px;
+  border-top: 1px solid var(--rule);
+}
+.bot-input input,
+.report textarea {
+  flex: 1;
+  min-width: 0;
+  padding: 9px 14px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 20px;
+  background: var(--page);
+  color: var(--ink);
+  font: 400 0.9375rem/1.4 var(--site-font);
+}
+.bot-input button {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-ink);
+  cursor: pointer;
+}
+
+.report {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 0 8px;
+}
+.report .button {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.report textarea {
+  flex-basis: 100%;
+  border-radius: 10px;
+  font-size: 0.8125rem;
+  resize: vertical;
+}
+
+@media (max-width: 560px) {
+  .bot {
+    inset: 0;
+    width: auto;
+    height: auto;
+    border: 0;
+    border-radius: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bot-launcher,
+  .typing i {
+    transition: none;
+    animation: none;
+  }
+}
+
+
+.colophon {
+  padding-top: 32px;
+  padding-bottom: 48px;
+  color: var(--ink-3);
+  font-size: 0.875rem;
+}
+
+@media (max-width: 560px) {
+  .masthead {
+    padding-top: 28px;
+  }
+  .clock {
+    grid-template-columns: repeat(2, auto);
+    gap: 8px 28px;
+  }
+  .site {
+    padding: 14px 16px;
+  }
+  .name {
+    font-size: 1.25rem;
+  }
+  .state {
+    font-size: 1rem;
+  }
+}

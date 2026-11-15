@@ -1,0 +1,71 @@
+/*
+  Shared by the extension and the website.
+  Paper and ink, plus one spot colour: process cyan, as on the two-colour pages of a manga magazine.
+  Surfaces are separated by 1px rules, not shadows.
+*/
+:root {
+  color-scheme: light;
+  --paper: #f8f9f8;
+  --paper-sunk: #eceeed;
+  --ink: #1c1f21;
+  --ink-2: #464e53;
+  --ink-3: #626a6f;
+  --rule: #dcdfde;
+  --rule-strong: #b9bfbe;
+  --accent: #00759c;
+  --accent-strong: #005f80;
+  --accent-ink: #ffffff;
+  --accent-wash: #e1eff5;
+  /* Screentone dots: decoration only, never carries text. */
+  --tone: #2a9fcd;
+  --warn: #855600;
+  --warn-wash: #f8eed8;
+  --danger: #ad2a1f;
+  --danger-wash: #f9e7e4;
+
+  --font: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --radius: 4px;
+}
+
+/* Dark is written twice: once for the browser's own setting, once for the explicit choice. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --paper: #1b1e20;
+    --paper-sunk: #24282a;
+    --ink: #e6e8e9;
+    --ink-2: #bcc2c5;
+    --ink-3: #979ea2;
+    --rule: #303538;
+    --rule-strong: #4b5357;
+    --accent: #5ec3ea;
+    --accent-strong: #8ad4f0;
+    --accent-ink: #0c2430;
+    --accent-wash: #173240;
+    --tone: #3aaedc;
+    --warn: #e8b85c;
+    --warn-wash: #33291a;
+    --danger: #f08b80;
+    --danger-wash: #3a2220;
+  }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --paper: #1b1e20;
+  --paper-sunk: #24282a;
+  --ink: #e6e8e9;
+  --ink-2: #bcc2c5;
+  --ink-3: #979ea2;
+  --rule: #303538;
+  --rule-strong: #4b5357;
+  --accent: #5ec3ea;
+  --accent-strong: #8ad4f0;
+  --accent-ink: #0c2430;
+  --accent-wash: #173240;
+  --tone: #3aaedc;
+  --warn: #e8b85c;
+  --warn-wash: #33291a;
+  --danger: #f08b80;
+  --danger-wash: #3a2220;
+}

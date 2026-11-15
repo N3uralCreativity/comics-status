@@ -1,0 +1,51 @@
+name: A site doesn't work
+description: Downloading from a supported site fails. The helper on status.n3uralcreativity.top fills this in for you.
+title: '[Site] What went wrong'
+labels: [site problem]
+body:
+  - type: input
+    id: site
+    attributes:
+      label: Site
+    validations:
+      required: true
+  - type: input
+    id: status
+    attributes:
+      label: Status page at report time
+      description: What the status page showed for this site, and when it was checked.
+  - type: input
+    id: action
+    attributes:
+      label: What you were doing
+  - type: input
+    id: error
+    attributes:
+      label: What the extension or the site showed
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and system
+      placeholder: Chrome on Windows
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Extension version
+      description: At the bottom of the extension's Settings tab.
+      placeholder: 5.0.0
+  - type: textarea
+    id: tried
+    attributes:
+      label: Already tried
+  - type: input
+    id: series
+    attributes:
+      label: Series page address
+  - type: textarea
+    id: details
+    attributes:
+      label: What happened, in your words
