@@ -157,7 +157,21 @@ async function refresh() {
   }
 }
 
+/** The same notices the extension's panel shows (notices.json, edited in the repo). Expired ones are left out. */
+async function notices() {
+  const file = await json('notices.json').catch(() => null);
+  const list = Array.isArray(file?.notices) ? file.notices : [];
+  const now = Date.now();
+  for (const n of list) {
+    if (typeof n?.text !== 'string' || (n.until && !(Date.parse(n.until) > now))) continue;
+    const p = el('p', { class: 'notice' }, n.text);
+    if (typeof n.link === 'string' && n.link.startsWith('https://')) p.append(' ', el('a', { href: n.link }, 'More'));
+    $('notices').append(p);
+  }
+}
+
 async function main() {
+  void notices();
   sites = await json('sites.json');
   // A fresh query skips the CDN's five-minute copy.
   status = await json(`${STATUS_URL}?t=${Date.now()}`).catch(() => null);

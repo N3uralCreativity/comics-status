@@ -113,6 +113,14 @@ h1 {
   font-size: 1.125rem;
   font-weight: 700;
 }
+.notice {
+  margin: 16px 0 0;
+  padding: 10px 14px;
+  border-left: 3px solid var(--accent);
+  background: var(--paper-sunk);
+  border-radius: var(--radius);
+}
+
 .alert {
   margin: 16px 0 0;
   padding: 10px 14px;
