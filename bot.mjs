@@ -138,7 +138,7 @@ const choices = (list) => list.map((x) => (typeof x === 'string' ? { label: x, v
  * One turn. `input` is the reader's text or chosen value (undefined to start).
  * Returns the new state and what to show: bot lines, then either choices or a text field.
  */
-export function step(state, input, { flows, sites, status, now = Date.now() }) {
+export function step(state, input, { flows, sites, status, presence, now = Date.now() }) {
   const say = [];
   const s = { ...state };
   const site = () => sites.find((x) => x.id === s.site);
@@ -217,6 +217,12 @@ export function step(state, input, { flows, sites, status, now = Date.now() }) {
     if (check?.state === 'down') return end(fill(flows.states.down, vars()));
     return askError();
   };
+  /** The report: first the extension version. */
+  function askVersion() {
+    s.step = 'version';
+    say.push(flows.askVersion);
+    return { say, text: true };
+  }
   function end(line) {
     say.push(line);
     s.step = 'done';
@@ -275,7 +281,7 @@ export function step(state, input, { flows, sites, status, now = Date.now() }) {
         s.step = 'another';
         say.push(flows.askAnother);
         out = { say, text: true };
-      } else out = step({}, undefined, { flows, sites, status, now });
+      } else out = step({}, undefined, { flows, sites, status, presence, now });
       break;
     case 'another':
       s.text = String(input ?? '').slice(0, 2000);
@@ -321,9 +327,49 @@ export function step(state, input, { flows, sites, status, now = Date.now() }) {
         out = end(flows.worked);
         break;
       }
-      s.step = 'version';
-      say.push(flows.askVersion);
-      out = { say, text: true };
+      // Still broken: the developer, if someone is online to chat; a report otherwise.
+      if (presence?.online > 0) {
+        s.step = 'offerLive';
+        say.push(fill(flows.offerLive, { online: presence.online === 1 ? flows.onePerson : `${presence.online} ${flows.people}` }));
+        out = {
+          say,
+          choices: [
+            { label: flows.talkLive, value: '__live' },
+            { label: flows.writeReport, value: '__report' },
+          ],
+        };
+        break;
+      }
+      if (presence) say.push(flows.nobodyOnline);
+      out = askVersion();
+      break;
+    case 'offerLive':
+      if (input !== '__live') {
+        out = askVersion();
+        break;
+      }
+      // The page opens the connection and calls back with '__ended:<reason>' when the chat is over.
+      s.step = 'live';
+      say.push(flows.liveConnecting);
+      out = { say, live: true, text: true, choices: [{ label: flows.endChat, value: '__endChat' }] };
+      break;
+    case 'live': {
+      const reason = String(input ?? '').replace(/^__ended:/, '');
+      say.push(flows.liveEnded[reason] ?? flows.liveEnded.lost);
+      s.step = 'afterLive';
+      say.push(flows.afterLive);
+      out = {
+        say,
+        choices: [
+          { label: flows.sorted, value: '__sorted' },
+          { label: flows.toReport, value: '__report' },
+          { label: flows.restart, value: '__restart' },
+        ],
+      };
+      break;
+    }
+    case 'afterLive':
+      out = input === '__sorted' ? end(flows.worked) : askVersion();
       break;
     case 'version': {
       const v = String(input ?? '').trim();
@@ -347,7 +393,7 @@ export function step(state, input, { flows, sites, status, now = Date.now() }) {
       break;
     }
     default:
-      return step({}, undefined, { flows, sites, status });
+      return step({}, undefined, { flows, sites, status, presence, now });
   }
   return { state: s, ...out };
 }
@@ -409,7 +455,12 @@ if (typeof document !== 'undefined') {
   const line = (who, text) => {
     const p = document.createElement('p');
     p.className = `msg from-${who}`;
-    p.textContent = text;
+    if (who === 'dev') {
+      const name = document.createElement('b');
+      name.textContent = 'Developer';
+      p.append(name, document.createElement('br'));
+    }
+    p.append(text);
     add(p);
   };
   const pause = (ms) => new Promise((r) => setTimeout(r, calm ? 0 : ms));
@@ -462,6 +513,7 @@ if (typeof document !== 'undefined') {
     );
     form.hidden = !turn.text;
     if (turn.wait) waitForCheck();
+    if (turn.live) connectLive();
     log.scrollTop = log.scrollHeight;
     (turn.text ? field : options.querySelector('button'))?.focus({ preventScroll: true });
   };
@@ -495,14 +547,75 @@ if (typeof document !== 'undefined') {
   }
 
   const restart = () => {
+    stopLive();
     log.replaceChildren();
+    // Who is online to chat; only needed near the end of a conversation, so it never holds up the greeting.
+    data.presence = null;
+    void get(`${CHAT_URL}/presence`).then((p) => (data.presence = p));
     return show(step({}, undefined, data));
   };
   const answer = async (value, label) => {
     if (value === '__restart') return restart();
+    if (chat) {
+      // While chatting, typed lines go to the developer, not to the scripted helper.
+      if (value === '__endChat') return void chat.send(JSON.stringify({ type: 'end' }));
+      line('you', label ?? value);
+      return void chat.send(JSON.stringify({ type: 'msg', text: value }));
+    }
     line('you', label ?? value);
     return show(step(state, value, data));
   };
+
+  // Live chat with the developer (chat/worker.mjs relays it to Telegram). No account: a random id
+  // for this tab, so a reload rejoins the same chat.
+  const CHAT_URL = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? 'http://127.0.0.1:8791' : 'https://chat.n3uralcreativity.top';
+  const subtitle = root.querySelector('.bot-who p');
+  const idleSubtitle = subtitle.textContent;
+  let chat = null;
+  let stopLive = () => {};
+  function chatId() {
+    const make = () => crypto.randomUUID().replace(/-/g, '');
+    try {
+      let id = sessionStorage.getItem('cdl-chat');
+      if (!id) sessionStorage.setItem('cdl-chat', (id = make()));
+      return id;
+    } catch {
+      return make();
+    }
+  }
+  function connectLive() {
+    const ws = new WebSocket(`${CHAT_URL.replace(/^http/, 'ws')}/ws?session=${chatId()}`);
+    chat = ws;
+    subtitle.textContent = data.flows.liveSubtitle;
+    let over = false;
+    const quiet = () => {
+      over = true;
+      chat = null;
+      subtitle.textContent = idleSubtitle;
+      ws.close();
+    };
+    stopLive = quiet;
+    const finish = (reason) => {
+      if (over) return;
+      quiet();
+      void show(step(state, `__ended:${reason}`, data));
+    };
+    ws.onmessage = (e) => {
+      let m;
+      try {
+        m = JSON.parse(e.data);
+      } catch {
+        return;
+      }
+      if (m.type === 'ready') {
+        ws.send(JSON.stringify({ type: 'start', context: report(state, data).body }));
+        line('bot', data.flows.liveConnected);
+      } else if (m.type === 'msg') line('dev', String(m.text));
+      else if (m.type === 'error') line('bot', data.flows.liveError[m.text] ?? data.flows.liveError.slow);
+      else if (m.type === 'ended') finish(m.reason);
+    };
+    ws.onclose = () => finish('lost');
+  }
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
