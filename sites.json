@@ -829,7 +829,7 @@
       "all": false,
       "groups": false
     },
-    "note": "The Blank asks every visitor to pass a human check before any page."
+    "note": "The Blank checks every visitor with Cloudflare, then locks each chapter list behind a browser proof and captchas."
   },
   {
     "id": "mangafire",
