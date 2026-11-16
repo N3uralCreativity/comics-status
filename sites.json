@@ -1,5 +1,23 @@
 [
   {
+    "id": "atsumaru",
+    "name": "Atsumaru",
+    "home": "https://atsu.moe",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": true
+    },
+    "note": "Many chapters come from several groups; pick a group to get only theirs.",
+    "probe": {
+      "url": "https://atsu.moe/",
+      "expect": "Atsumaru"
+    }
+  },
+  {
     "id": "chikari",
     "name": "chikari.moe",
     "home": "https://chikari.moe",
@@ -468,6 +486,42 @@
     }
   },
   {
+    "id": "omegascans",
+    "name": "Omega Scans",
+    "home": "https://omegascans.org",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": false
+    },
+    "note": "Adult manhwa. Chapters that cost coins are left out.",
+    "probe": {
+      "url": "https://omegascans.org/",
+      "expect": "Omega Scans"
+    }
+  },
+  {
+    "id": "qiscans",
+    "name": "Qi Scans",
+    "home": "https://qimanga.com",
+    "status": "beta",
+    "ui": "inject",
+    "features": {
+      "single": true,
+      "select": true,
+      "all": true,
+      "groups": false
+    },
+    "note": "The newest chapters often cost coins; those are left out until they turn free.",
+    "probe": {
+      "url": "https://qimanga.com/",
+      "expect": "Qi Manga"
+    }
+  },
+  {
     "id": "comix",
     "name": "Comix",
     "home": "https://comix.to",
@@ -673,21 +727,6 @@
     }
   },
   {
-    "id": "atsumaru",
-    "name": "Atsumaru",
-    "home": "https://atsu.moe",
-    "status": "skipped",
-    "skipReason": "own-downloads",
-    "ui": "panel",
-    "features": {
-      "single": false,
-      "select": false,
-      "all": false,
-      "groups": false
-    },
-    "note": "Atsumaru already lets readers download chapters as CBZ."
-  },
-  {
     "id": "dynasty",
     "name": "Dynasty Reader",
     "home": "https://dynasty-scans.com",
@@ -776,6 +815,21 @@
       "groups": false
     },
     "note": "Toonz puts a browser check in front of its series and chapter pages."
+  },
+  {
+    "id": "theblank",
+    "name": "The Blank",
+    "home": "https://theblank.net",
+    "status": "skipped",
+    "skipReason": "challenge",
+    "ui": "panel",
+    "features": {
+      "single": false,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "note": "The Blank asks every visitor to pass a human check before any page."
   },
   {
     "id": "mangafire",
