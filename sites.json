@@ -187,8 +187,8 @@
     },
     "note": "Lists chapters in your browser’s language and in English; pick a group in the panel to choose one version.",
     "probe": {
-      "url": "https://mangadex.org/",
-      "expect": "MangaDex"
+      "url": "https://api.mangadex.org/ping",
+      "expect": "pong"
     }
   },
   {

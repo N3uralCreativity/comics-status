@@ -4,6 +4,7 @@
 //   node probe.mjs --dry [out]  check and print; with a file name, also write the result there
 // A site's shown state only changes after two identical results in a row, so one bad check
 // from GitHub's network never flips a site to "down".
+import { execFile } from 'node:child_process';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -11,7 +12,8 @@ import { fileURLToPath } from 'node:url';
 export const GIST_ID = 'd7df8d80e3e844114aa9b90c700e2b84';
 export const STATUS_URL = `https://gist.githubusercontent.com/N3uralCreativity/${GIST_ID}/raw/status.json`;
 const TIMEOUT_MS = 20_000;
-const UA = 'Mozilla/5.0 (compatible; ComixDownloaderStatus/1.0; +https://status.n3uralcreativity.top)';
+// Not "Mozilla/…": MangaDex sends anything calling itself a browser to its human check.
+const UA = 'ComicsDownloaderStatus/1.0 (+https://status.n3uralcreativity.top)';
 
 const CHALLENGE = /just a moment|bot challenge|checking your browser|verify you are human|performing security verification|challenge-platform|cf-chl/i;
 const PARKED = /domain (?:name )?(?:is |may be )?for sale|buy this domain|this domain has expired|parkingcrew|sedoparking|bodis\.com|domain parking/i;
@@ -47,14 +49,23 @@ export function next(prev, verdict, now) {
   return { state: change ? verdict : prev.state, since: change ? now : prev.since, checkedAt: now, last: verdict, streak };
 }
 
-async function ask(url) {
-  try {
-    const res = await fetch(url, { headers: { 'user-agent': UA, accept: 'text/html' }, redirect: 'follow', signal: AbortSignal.timeout(TIMEOUT_MS) });
-    const body = (await res.text()).slice(0, 200_000);
-    return { status: res.status, headers: res.headers, body, url: res.url };
-  } catch (e) {
-    return { error: String(e?.cause?.code ?? e?.name ?? e) };
-  }
+/**
+ * One request with curl, not Node's fetch: from GitHub's network Cloudflare turned fetch away on 10
+ * sites while curl reached 9 of them (tested 2026-11-21). The status line, final address and the
+ * challenge header go to stderr; the page to stdout.
+ */
+function ask(url) {
+  const meta = '%{stderr}%{http_code}\\n%{url_effective}\\n%header{cf-mitigated}';
+  const args = ['-s', '-L', '--max-time', String(TIMEOUT_MS / 1000), '-A', UA, '-H', 'accept: text/html', '-w', meta, url];
+  return new Promise((done) => {
+    execFile('curl', args, { encoding: 'utf8', maxBuffer: 20_000_000 }, (err, body, info) => {
+      // The last three lines: some curl builds print a warning of their own first.
+      const [code, final, mitigated] = info.split('\n').slice(-3);
+      if (err || code === '000') return done({ error: err?.code === 'ENOENT' ? 'curl not found' : `curl exit ${err?.code ?? 0}` });
+      const headers = new Headers(mitigated?.trim() ? { 'cf-mitigated': mitigated.trim() } : {});
+      done({ status: Number(code), headers, body: body.slice(0, 200_000), url: final });
+    });
+  });
 }
 
 async function main() {

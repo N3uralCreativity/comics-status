@@ -22,7 +22,6 @@ const STATE_TEXT = {
   unknown: 'Couldn’t check',
   // Added after the last run: the next one checks it.
   unchecked: 'Not checked yet',
-  checking: 'Checking',
 };
 const FEATURES = [
   ['single', 'One chapter'],
@@ -53,8 +52,11 @@ function el(tag, attrs = {}, ...children) {
   return e;
 }
 
-/** What the row shows: every probed site is "Checking" while a run is out, then its result. */
-const stateOf = (site) => (site.status === 'rework' ? 'rework' : running ? 'checking' : status?.sites?.[site.id]?.state ?? 'unchecked');
+/**
+ * What the row shows: the latest result, kept while the next run is out. GitHub starts runs late
+ * (often 10 minutes, sometimes an hour), so hiding results until a run reports hid them for long.
+ */
+const stateOf = (site) => (site.status === 'rework' ? 'rework' : status?.sites?.[site.id]?.state ?? 'unchecked');
 
 function row(site) {
   const check = status?.sites?.[site.id];
@@ -80,7 +82,6 @@ function row(site) {
       // The page-wide "Last check" covers every site the latest run reached; only older checks are named.
       check?.checkedAt && check.checkedAt !== status.checkedAt ? el('li', {}, `Checked ${when(check.checkedAt)}`) : null,
     ),
-    state === 'checking' && check ? el('p', { class: 'since' }, `Last result: ${STATE_TEXT[check.state]}`) : null,
     state === 'challenge' ? el('p', { class: 'since' }, 'Online, but it may ask you to pass a browser check on the site before downloads start.') : null,
     state === 'unknown' ? el('p', { class: 'since' }, 'The site answered, but turned the checker away, so this can’t say whether it works right now.') : null,
     state === 'unchecked' && status ? el('p', { class: 'since' }, 'Added after the last check; the next one covers it.') : null,
@@ -101,7 +102,7 @@ function render() {
 
   const live = listed.filter((s) => s.status !== 'rework');
   const working = live.filter((s) => ['up', 'challenge'].includes(stateOf(s))).length;
-  $('count').textContent = running ? 'Checking' : status ? `${working} of ${live.length}` : 'Unknown';
+  $('count').textContent = status ? `${working} of ${live.length}` : 'Unknown';
   $('last').textContent = status?.checkedAt ? when(status.checkedAt) : 'Not available';
   clock();
 }
