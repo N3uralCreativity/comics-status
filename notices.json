@@ -1,3 +1,10 @@
 {
-  "notices": []
+  "notices": [
+    {
+      "id": "release-5.0",
+      "text": "Comics Downloader 5.0 comes out on Sunday 22 November at 12:00 UTC, on Chrome and Firefox.",
+      "link": "https://n3uralcreativity.top/comics-downloader/",
+      "until": "2026-11-22T12:00:00Z"
+    }
+  ]
 }
