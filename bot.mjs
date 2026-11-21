@@ -3,7 +3,7 @@
 // conversations; the DOM part at the bottom only draws it. Nothing typed leaves the page until the
 // reader opens the GitHub link it builds.
 
-export const ISSUE_REPO = 'https://github.com/N3uralCreativity/comix-status';
+export const ISSUE_REPO = 'https://github.com/N3uralCreativity/comics-status';
 const STATE_TEXT = {
   up: 'working',
   challenge: 'working, may ask for a browser check',
