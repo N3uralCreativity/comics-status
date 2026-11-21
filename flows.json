@@ -17,7 +17,7 @@
   "askAnother": "Which site?",
   "askSite": "Which site was it?",
   "otherSite": "Another site",
-  "notListed": "Comix Downloader only works on the sites listed on this page. If you'd like a site added, open an issue on GitHub and name it.",
+  "notListed": "Comics Downloader only works on the sites listed on this page. If you'd like a site added, open an issue on GitHub and name it.",
   "askError": "What does the extension or the site show?",
   "askBrowser": "Which browser are you using?",
   "askSystem": "And which system?",
