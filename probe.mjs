@@ -72,8 +72,11 @@ async function main() {
   const dry = process.argv.includes('--dry');
   const out = dry ? process.argv[process.argv.indexOf('--dry') + 1] : undefined;
   const sites = JSON.parse(readFileSync(new URL('./sites.json', import.meta.url), 'utf8')).filter((s) => s.probe);
-  const before = await fetch(STATUS_URL, { cache: 'no-store' })
+  // The API, not STATUS_URL: GitHub caches the raw file for minutes, and a run reading a stale copy restarts every streak.
+  const token = process.env.GIST_TOKEN;
+  const before = await fetch(`https://api.github.com/gists/${GIST_ID}`, { headers: token ? { authorization: `Bearer ${token}` } : {} })
     .then((r) => (r.ok ? r.json() : null))
+    .then((g) => (g ? JSON.parse(g.files['status.json'].content) : null))
     .catch(() => null);
   const now = new Date().toISOString();
   const result = { v: 1, checkedAt: now, sites: {} };
@@ -88,7 +91,6 @@ async function main() {
     if (out) writeFileSync(out, json);
     return;
   }
-  const token = process.env.GIST_TOKEN;
   if (!token) throw new Error('GIST_TOKEN is not set');
   const res = await fetch(`https://api.github.com/gists/${GIST_ID}`, {
     method: 'PATCH',
