@@ -1,12 +1,3 @@
 {
-  "notices": [
-    {
-      "id": "released-5.0-chrome-slow",
-      "kind": "warn",
-      "text": "Comics Downloader 5.0 is out. On Chrome the update is rolling out slower than usual, so it can take a while to reach you. It installs itself; there's nothing to do.",
-      "link": "https://n3uralcreativity.top/comics-downloader/",
-      "below": "5.0.0",
-      "until": "2026-11-29T00:00:00Z"
-    }
-  ]
+  "notices": []
 }
