@@ -277,6 +277,40 @@ h2 {
   margin-top: 2px;
 }
 
+/* A site's how-to: folded, its steps numbered. */
+.how {
+  margin-top: 8px;
+  font-size: 0.875rem;
+}
+.how summary {
+  cursor: pointer;
+  color: var(--accent);
+  font-weight: 700;
+}
+.how ol {
+  margin: 6px 0 0;
+  padding: 0;
+  /* Numbered by hand: markers inside the Sites list's grid rows aren't drawn. */
+  list-style: none;
+  counter-reset: step;
+  color: var(--ink-2);
+}
+
+.how li {
+  display: grid;
+  grid-template-columns: 1.4em 1fr;
+  counter-increment: step;
+}
+
+.how li::before {
+  content: counter(step) '.';
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+.how li + li {
+  margin-top: 4px;
+}
+
 /* The helper: a launcher in the corner that opens a chat window. */
 
 .open-bot {

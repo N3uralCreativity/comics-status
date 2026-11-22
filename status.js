@@ -87,6 +87,10 @@ function row(site) {
     state === 'unchecked' && status ? el('p', { class: 'since' }, 'Added after the last check; the next one covers it.') : null,
     check && (state === 'down' || state === 'challenge') && check.since ? el('p', { class: 'since' }, `Since ${when(check.since)}`) : null,
     site.note ? el('p', { class: 'note' }, site.note) : null,
+    // What the user has to do on this site, as the extension's panel says it.
+    Array.isArray(site.steps) && site.steps.length
+      ? el('details', { class: 'how' }, el('summary', {}, `How to download from ${site.name}`), el('ol', {}, ...site.steps.map((s) => el('li', {}, s))))
+      : null,
   );
 }
 

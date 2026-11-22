@@ -186,6 +186,10 @@
       "groups": true
     },
     "note": "Lists chapters in your browser’s language and in English; pick a group in the panel to choose one version.",
+    "steps": [
+      "Open a series on MangaDex. Its pages get no buttons: the chapter list is in the panel.",
+      "Pick a group in the panel to get one version of each chapter, then tick the chapters and download."
+    ],
     "probe": {
       "url": "https://api.mangadex.org/ping",
       "expect": "pong"
@@ -359,6 +363,10 @@
       "groups": true
     },
     "note": "Most chapters come from several groups; pick one in the panel. After a number of chapters the site asks you to confirm you are human: do that on the site, then resume.",
+    "steps": [
+      "Pick a group in the panel: most chapters come from several.",
+      "After a number of chapters, Toonkotsu asks you to confirm you are human and the download pauses. Confirm it on the site in your tab, then press Resume in the Downloads tab."
+    ],
     "probe": {
       "url": "https://toonkotsu.com/",
       "expect": "Toonkotsu"
@@ -463,6 +471,10 @@
       "groups": false
     },
     "note": "Download from a source page: each language or uploader edition of a title is its own source.",
+    "steps": [
+      "Open a title on XComic, then one of its sources: each language or uploader edition is its own source.",
+      "Download from that source page: the buttons and the panel list its chapters."
+    ],
     "probe": {
       "url": "https://xcomic.me/",
       "expect": "XCOMIC"
@@ -534,6 +546,12 @@
       "groups": false
     },
     "note": "Open a chapter, scroll through it to the end, then save it from the panel. One chapter at a time: comix keeps its chapter data to its own reader, so the extension saves what the reader has shown you.",
+    "steps": [
+      "Open the chapter you want on Comix. Only an open chapter can be saved, one at a time.",
+      "Scroll down to the very end of the chapter and wait until every page has finished loading: no loading animation left anywhere.",
+      "To go faster, drag the scroll bar on the right down to the bottom, then back up and down again, until every page shows.",
+      "Then press Download this chapter in the panel, and keep the chapter open in its tab until it has saved."
+    ],
     "probe": {
       "url": "https://comix.to",
       "expect": "comix"
