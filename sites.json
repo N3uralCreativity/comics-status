@@ -558,6 +558,30 @@
     }
   },
   {
+    "id": "theblank",
+    "name": "The Blank",
+    "home": "https://theblank.net",
+    "status": "beta",
+    "ui": "panel",
+    "features": {
+      "single": true,
+      "select": false,
+      "all": false,
+      "groups": false
+    },
+    "adult": true,
+    "note": "Adult manhwa, in French. Open a chapter, scroll through it to the end, then save it from the panel. Premium chapters are left out.",
+    "steps": [
+      "Open the chapter you want on The Blank, and pass its security check if it asks. Only an open chapter can be saved, one at a time.",
+      "Scroll down to the very end of the chapter and wait until every page shows.",
+      "Then press Download this chapter in the panel, and keep the chapter open in its tab until it has saved."
+    ],
+    "probe": {
+      "url": "https://theblank.net",
+      "expect": "The Blank"
+    }
+  },
+  {
     "id": "manhuaplus",
     "name": "ManhuaPlus",
     "home": "https://manhuaplus.com",
@@ -833,21 +857,6 @@
       "groups": false
     },
     "note": "Toonz puts a browser check in front of its series and chapter pages."
-  },
-  {
-    "id": "theblank",
-    "name": "The Blank",
-    "home": "https://theblank.net",
-    "status": "skipped",
-    "skipReason": "challenge",
-    "ui": "panel",
-    "features": {
-      "single": false,
-      "select": false,
-      "all": false,
-      "groups": false
-    },
-    "note": "The Blank checks every visitor with Cloudflare, then locks each chapter list behind a browser proof and captchas."
   },
   {
     "id": "mangafire",
