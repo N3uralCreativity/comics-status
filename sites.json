@@ -3,7 +3,7 @@
     "id": "atsumaru",
     "name": "Atsumaru",
     "home": "https://atsu.moe",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
@@ -21,7 +21,7 @@
     "id": "chikari",
     "name": "chikari.moe",
     "home": "https://chikari.moe",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
@@ -39,7 +39,7 @@
     "id": "cubari",
     "name": "Cubari",
     "home": "https://cubari.moe",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
@@ -57,7 +57,7 @@
     "id": "mangaball",
     "name": "Mangaball",
     "home": "https://mangaball.com",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
@@ -75,7 +75,7 @@
     "id": "mangadna",
     "name": "MangaDNA",
     "home": "https://mangadna.com",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
@@ -92,7 +92,7 @@
     "id": "mangademon",
     "name": "Manga Demon",
     "home": "https://demonicscans.org",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
@@ -109,7 +109,7 @@
     "id": "mangahub",
     "name": "MangaHub",
     "home": "https://mangahub.io",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
@@ -126,7 +126,7 @@
     "id": "mangageko",
     "name": "MangaGeko",
     "home": "https://www.mgeko.cc",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
@@ -143,7 +143,7 @@
     "id": "mangak",
     "name": "MangaK",
     "home": "https://mangak.io",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
@@ -160,7 +160,7 @@
     "id": "mangade",
     "name": "MangaDE",
     "home": "https://mangade.io",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
@@ -199,7 +199,7 @@
     "id": "mangapill",
     "name": "Mangapill",
     "home": "https://mangapill.com",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
@@ -216,7 +216,7 @@
     "id": "mangatown",
     "name": "MangaTown",
     "home": "https://www.mangatown.com",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
@@ -234,7 +234,7 @@
     "id": "manganato",
     "name": "MangaNato",
     "home": "https://www.manganato.gg",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
@@ -251,7 +251,7 @@
     "id": "manhuabuddy",
     "name": "ManhuaBuddy",
     "home": "https://manhuabuddy.com",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
@@ -268,7 +268,7 @@
     "id": "manhwa18",
     "name": "Manhwa18.cc",
     "home": "https://manhwa18.cc",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
@@ -286,7 +286,7 @@
     "id": "raw1001",
     "name": "raw1001",
     "home": "https://raw1001.net",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
@@ -303,7 +303,7 @@
     "id": "rawkuma",
     "name": "Rawkuma",
     "home": "https://rawkuma.net",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
@@ -320,7 +320,7 @@
     "id": "mangarawjp",
     "name": "漫画 raw (MangaRawJP)",
     "home": "https://mangarawjp.net",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
@@ -337,7 +337,7 @@
     "id": "mangaraw",
     "name": "MangaRaw",
     "home": "https://mangaraw.co.uk",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
@@ -376,7 +376,7 @@
     "id": "twmanga",
     "name": "Twmanga",
     "home": "https://www.twmanga.com",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
@@ -394,7 +394,7 @@
     "id": "vymanga",
     "name": "VyManga",
     "home": "https://mangavyvy.net",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
@@ -411,7 +411,7 @@
     "id": "weebcentral",
     "name": "Weeb Central",
     "home": "https://weebcentral.com",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
@@ -428,7 +428,7 @@
     "id": "weloma",
     "name": "WeLoMa",
     "home": "https://weloma.art",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
@@ -445,7 +445,7 @@
     "id": "nihonkuni",
     "name": "NihonKuni",
     "home": "https://nihonkuni.com",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
@@ -484,7 +484,7 @@
     "id": "zinmanga",
     "name": "Zinmanga",
     "home": "https://www.zinmanga.net",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
@@ -501,7 +501,7 @@
     "id": "omegascans",
     "name": "Omega Scans",
     "home": "https://omegascans.org",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
@@ -519,7 +519,7 @@
     "id": "qiscans",
     "name": "Qi Scans",
     "home": "https://qimanga.com",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
@@ -585,7 +585,7 @@
     "id": "manhuaplus",
     "name": "ManhuaPlus",
     "home": "https://manhuaplus.com",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
@@ -602,7 +602,7 @@
     "id": "manhwanex",
     "name": "Manhwanex",
     "home": "https://manhwanex.com",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
@@ -619,7 +619,7 @@
     "id": "mangasushi",
     "name": "Mangasushi",
     "home": "https://mangasushi.org",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
@@ -636,7 +636,7 @@
     "id": "mangaread",
     "name": "MangaRead",
     "home": "https://www.mangaread.org",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
@@ -653,7 +653,7 @@
     "id": "manhuahot",
     "name": "Manhua Hot",
     "home": "https://manhuahot.com",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
@@ -670,7 +670,7 @@
     "id": "aquamanga",
     "name": "Aqua Manga",
     "home": "https://aquareader.org",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
@@ -687,7 +687,7 @@
     "id": "rawdevart",
     "name": "Rawdevart",
     "home": "https://rawdevart.art",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
@@ -704,7 +704,7 @@
     "id": "rawsakura",
     "name": "RawSakura",
     "home": "https://rawsakura.org",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
@@ -721,7 +721,7 @@
     "id": "mangamikan",
     "name": "MangaMikan",
     "home": "https://mangamikan.com",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
@@ -738,7 +738,7 @@
     "id": "mangacherri",
     "name": "MangaCherri",
     "home": "https://mangacherri.com",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
@@ -755,7 +755,7 @@
     "id": "mangaberri",
     "name": "MangaBerri",
     "home": "https://mangaberri.com",
-    "status": "beta",
+    "status": "supported",
     "ui": "inject",
     "features": {
       "single": true,
