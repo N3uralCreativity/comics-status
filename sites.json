@@ -669,7 +669,7 @@
   {
     "id": "aquamanga",
     "name": "Aqua Manga",
-    "home": "https://aquareader.org",
+    "home": "https://aquamanga.io",
     "status": "supported",
     "ui": "inject",
     "features": {
@@ -679,8 +679,8 @@
       "groups": false
     },
     "probe": {
-      "url": "https://aquareader.org/",
-      "expect": "aquareader.org"
+      "url": "https://aquamanga.io/",
+      "expect": "aquamanga.io"
     }
   },
   {
